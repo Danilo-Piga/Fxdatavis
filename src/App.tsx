@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import { TrendingUp, TrendingDown, DollarSign, Euro, Globe } from 'lucide-react';
+import { TrendingUp, TrendingDown, DollarSign, Euro, Globe, ArrowRightLeft } from 'lucide-react';
 import { ExchangeRateChart } from './components/ExchangeRateChart';
 import { CurrencyPairCard } from './components/CurrencyPairCard';
 import { VolumeChart } from './components/VolumeChart';
 import { MarketHeatmap } from './components/MarketHeatmap';
+import { CurrencyConverter } from './components/CurrencyConverter';
+import { TechnicalIndicators } from './components/TechnicalIndicators';
 
 export default function App() {
   const [selectedPair, setSelectedPair] = useState('EUR/USD');
   const [timeframe, setTimeframe] = useState('1D');
+  const [showHistorical, setShowHistorical] = useState(false);
+  const [activeIndicators, setActiveIndicators] = useState<string[]>([]);
 
   const currencyPairs = [
     { 
@@ -67,24 +71,32 @@ export default function App() {
     { label: 'Volatility Index', value: '12.4', icon: Euro, trend: 1.7 },
   ];
 
+  const toggleIndicator = (indicator: string) => {
+    setActiveIndicators(prev => 
+      prev.includes(indicator) 
+        ? prev.filter(i => i !== indicator)
+        : [...prev, indicator]
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-      <div className="max-w-[1600px] mx-auto space-y-6">
+    <div className="min-h-screen bg-black p-4 md:p-6">
+      <div className="max-w-[1600px] mx-auto space-y-4">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-slate-900 mb-2">Foreign Exchange Market</h1>
-            <p className="text-slate-600">Real-time currency trading data and analytics</p>
+            <h1 className="text-white mb-1">FX Market</h1>
+            <p className="text-slate-400 text-sm">Live trading data</p>
           </div>
           <div className="flex gap-2">
             {['1D', '1W', '1M', '3M', '1Y'].map((tf) => (
               <button
                 key={tf}
                 onClick={() => setTimeframe(tf)}
-                className={`px-4 py-2 rounded-lg transition-all ${
+                className={`px-3 py-1.5 rounded-full text-sm transition-all ${
                   timeframe === tf
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white text-slate-600 hover:bg-slate-50'
+                    ? 'bg-cyan-400 text-black'
+                    : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
                 }`}
               >
                 {tf}
@@ -94,90 +106,167 @@ export default function App() {
         </div>
 
         {/* Market Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {marketSummary.map((item) => {
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {marketSummary.map((item, index) => {
             const Icon = item.icon;
+            const colors = [
+              'from-lime-400 to-lime-500',
+              'from-cyan-400 to-cyan-500',
+              'from-pink-400 to-pink-500',
+              'from-purple-400 to-purple-500'
+            ];
             return (
               <div
                 key={item.label}
-                className="bg-white rounded-xl p-6 shadow-sm border border-slate-200"
+                className={`bg-gradient-to-br ${colors[index]} rounded-3xl p-5 shadow-xl relative overflow-hidden`}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-blue-600" />
-                  </div>
-                  {item.trend !== 0 && (
-                    <div className={`flex items-center gap-1 text-sm ${
-                      item.trend > 0 ? 'text-green-600' : 'text-red-600'
-                    }`}>
-                      {item.trend > 0 ? (
-                        <TrendingUp className="w-4 h-4" />
-                      ) : (
-                        <TrendingDown className="w-4 h-4" />
-                      )}
-                      {Math.abs(item.trend)}%
+                <div className="relative z-10">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="w-10 h-10 bg-black/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                      <Icon className="w-5 h-5 text-black" />
                     </div>
-                  )}
+                    {item.trend !== 0 && (
+                      <div className={`flex items-center gap-1 text-sm ${
+                        item.trend > 0 ? 'text-black' : 'text-black'
+                      }`}>
+                        {item.trend > 0 ? (
+                          <TrendingUp className="w-4 h-4" />
+                        ) : (
+                          <TrendingDown className="w-4 h-4" />
+                        )}
+                        {Math.abs(item.trend)}%
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-black/70 text-xs mb-1">{item.label}</p>
+                  <p className="text-black text-2xl">{item.value}</p>
                 </div>
-                <p className="text-slate-600 text-sm mb-1">{item.label}</p>
-                <p className="text-slate-900">{item.value}</p>
               </div>
             );
           })}
         </div>
 
+        {/* Currency Converter */}
+        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl p-6 shadow-xl">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-10 h-10 bg-black/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <ArrowRightLeft className="w-5 h-5 text-black" />
+            </div>
+            <h2 className="text-black">Currency Converter</h2>
+          </div>
+          <CurrencyConverter currencyPairs={currencyPairs} />
+        </div>
+
         {/* Main Chart Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <div className="flex items-center justify-between mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-800">
+            <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="text-slate-900 mb-1">{selectedPair} Exchange Rate</h2>
-                <p className="text-slate-600 text-sm">
-                  Last updated: {new Date().toLocaleTimeString()}
+                <h2 className="text-white mb-1">{selectedPair}</h2>
+                <p className="text-slate-500 text-sm">
+                  {new Date().toLocaleTimeString()}
                 </p>
               </div>
-              <select
-                value={selectedPair}
-                onChange={(e) => setSelectedPair(e.target.value)}
-                className="px-4 py-2 border border-slate-200 rounded-lg text-slate-700 bg-white"
-              >
-                {currencyPairs.map((cp) => (
-                  <option key={cp.pair} value={cp.pair}>
-                    {cp.pair}
-                  </option>
-                ))}
-              </select>
+              <div className="flex items-center gap-3">
+                <label className="flex items-center gap-2 text-sm text-slate-400 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={showHistorical}
+                    onChange={(e) => setShowHistorical(e.target.checked)}
+                    className="w-4 h-4 text-cyan-400 bg-slate-800 border-slate-600 rounded focus:ring-cyan-400"
+                  />
+                  Historical
+                </label>
+                <select
+                  value={selectedPair}
+                  onChange={(e) => setSelectedPair(e.target.value)}
+                  className="px-3 py-1.5 border border-slate-700 rounded-full text-sm text-slate-200 bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                >
+                  {currencyPairs.map((cp) => (
+                    <option key={cp.pair} value={cp.pair}>
+                      {cp.pair}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <ExchangeRateChart timeframe={timeframe} pair={selectedPair} />
+
+            {/* Technical Indicator Toggles */}
+            <div className="flex gap-2 mb-4">
+              {['EMA', 'RSI', 'MACD'].map((indicator, index) => {
+                const colors = ['bg-purple-500', 'bg-pink-500', 'bg-lime-500'];
+                return (
+                  <button
+                    key={indicator}
+                    onClick={() => toggleIndicator(indicator)}
+                    className={`px-3 py-1 rounded-full text-xs transition-all ${
+                      activeIndicators.includes(indicator)
+                        ? `${colors[index]} text-black shadow-lg`
+                        : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                    }`}
+                  >
+                    {indicator}
+                  </button>
+                );
+              })}
+            </div>
+
+            <ExchangeRateChart 
+              timeframe={timeframe} 
+              pair={selectedPair} 
+              showHistorical={showHistorical}
+              activeIndicators={activeIndicators}
+            />
           </div>
 
           {/* Currency Pairs List */}
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <h2 className="text-slate-900 mb-4">Major Pairs</h2>
-            <div className="space-y-3">
-              {currencyPairs.map((cp) => (
-                <CurrencyPairCard
-                  key={cp.pair}
-                  {...cp}
-                  isSelected={cp.pair === selectedPair}
-                  onClick={() => setSelectedPair(cp.pair)}
-                />
-              ))}
-            </div>
+          <div className="space-y-3">
+            <h2 className="text-white mb-2 px-2">Major Pairs</h2>
+            {currencyPairs.map((cp) => (
+              <CurrencyPairCard
+                key={cp.pair}
+                {...cp}
+                isSelected={cp.pair === selectedPair}
+                onClick={() => setSelectedPair(cp.pair)}
+              />
+            ))}
           </div>
         </div>
 
+        {/* Technical Indicators Panel */}
+        {activeIndicators.length > 0 && (
+          <TechnicalIndicators 
+            pair={selectedPair}
+            timeframe={timeframe}
+            activeIndicators={activeIndicators}
+          />
+        )}
+
         {/* Bottom Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <h2 className="text-slate-900 mb-1">Trading Volume</h2>
-            <p className="text-slate-600 text-sm mb-6">24-hour volume by currency pair</p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-800">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center">
+                <DollarSign className="w-5 h-5 text-black" />
+              </div>
+              <div>
+                <h2 className="text-white">Trading Volume</h2>
+                <p className="text-slate-500 text-xs">24-hour volume</p>
+              </div>
+            </div>
             <VolumeChart />
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <h2 className="text-slate-900 mb-1">Market Heatmap</h2>
-            <p className="text-slate-600 text-sm mb-6">Percentage change across major pairs</p>
+          <div className="bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-800">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl flex items-center justify-center">
+                <Globe className="w-5 h-5 text-black" />
+              </div>
+              <div>
+                <h2 className="text-white">Market Heatmap</h2>
+                <p className="text-slate-500 text-xs">% change</p>
+              </div>
+            </div>
             <MarketHeatmap />
           </div>
         </div>

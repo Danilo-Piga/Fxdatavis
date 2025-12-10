@@ -13,33 +13,38 @@ export function VolumeChart() {
   ];
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={280}>
       <BarChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
         <XAxis 
           dataKey="pair" 
-          stroke="#64748b"
-          tick={{ fontSize: 12 }}
+          stroke="#475569"
+          tick={{ fontSize: 11, fill: '#64748b' }}
           angle={-45}
           textAnchor="end"
           height={80}
         />
         <YAxis 
-          stroke="#64748b"
-          tick={{ fontSize: 12 }}
-          label={{ value: 'Billions (USD)', angle: -90, position: 'insideLeft', style: { fontSize: 12, fill: '#64748b' } }}
+          stroke="#475569"
+          tick={{ fontSize: 11, fill: '#64748b' }}
         />
         <Tooltip
           contentStyle={{
-            backgroundColor: '#1e293b',
-            border: 'none',
-            borderRadius: '8px',
+            backgroundColor: '#0f172a',
+            border: '1px solid #1e293b',
+            borderRadius: '12px',
             color: '#fff',
             padding: '12px'
           }}
           formatter={(value: number) => [`$${value}B`, 'Volume']}
         />
-        <Bar dataKey="volume" fill="#3b82f6" radius={[8, 8, 0, 0]} />
+        <Bar dataKey="volume" fill="url(#volumeGradient)" radius={[12, 12, 0, 0]} />
+        <defs>
+          <linearGradient id="volumeGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#84cc16" />
+            <stop offset="100%" stopColor="#22c55e" />
+          </linearGradient>
+        </defs>
       </BarChart>
     </ResponsiveContainer>
   );

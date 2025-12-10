@@ -15,35 +15,26 @@ export function MarketHeatmap() {
   ];
 
   const getColor = (change: number) => {
-    const intensity = Math.min(Math.abs(change) * 100, 70);
-    if (change > 0.4) return '#22c55e';
-    if (change > 0.2) return '#86efac';
-    if (change > 0) return '#d1fae5';
-    if (change > -0.2) return '#fee2e2';
-    if (change > -0.4) return '#fca5a5';
-    return '#ef4444';
-  };
-
-  const getTextColor = (change: number) => {
-    return Math.abs(change) > 0.2 ? '#ffffff' : '#1e293b';
+    if (change > 0.4) return 'from-lime-400 to-lime-500';
+    if (change > 0.2) return 'from-cyan-400 to-cyan-500';
+    if (change > 0) return 'from-blue-400 to-blue-500';
+    if (change > -0.2) return 'from-pink-300 to-pink-400';
+    if (change > -0.4) return 'from-rose-400 to-rose-500';
+    return 'from-red-500 to-red-600';
   };
 
   return (
-    <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
+    <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
       {heatmapData.map((item) => (
         <div
           key={item.pair}
-          className="aspect-square rounded-lg p-3 flex flex-col items-center justify-center transition-transform hover:scale-105 cursor-pointer shadow-sm"
-          style={{
-            backgroundColor: getColor(item.change),
-            color: getTextColor(item.change),
-          }}
+          className={`bg-gradient-to-br ${getColor(item.change)} aspect-square rounded-2xl p-3 flex flex-col items-center justify-center transition-transform hover:scale-105 cursor-pointer shadow-lg`}
         >
-          <p className="text-xs mb-1 opacity-90">{item.pair}</p>
-          <p className="mb-1">
+          <p className="text-xs text-black/70 mb-1">{item.pair}</p>
+          <p className="text-black text-lg mb-0.5">
             {item.change > 0 ? '+' : ''}{item.change.toFixed(2)}%
           </p>
-          <p className="text-xs opacity-75">{item.volume}</p>
+          <p className="text-xs text-black/60">{item.volume}</p>
         </div>
       ))}
     </div>
