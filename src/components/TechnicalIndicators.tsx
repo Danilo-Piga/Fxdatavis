@@ -53,41 +53,41 @@ export function TechnicalIndicators({ pair, timeframe, activeIndicators }: Techn
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       {/* EMA Card */}
       {activeIndicators.includes('EMA') && (
-        <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl p-6 shadow-xl">
+        <div className="bg-gradient-to-br from-blue-600 to-blue-500 rounded-3xl p-6 shadow-xl">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-12 h-12 bg-black/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-              <Activity className="w-6 h-6 text-black" />
+            <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <Activity className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h3 className="text-black text-sm">EMA</h3>
-              <p className="text-black/70 text-xs">Moving Average</p>
+              <h3 className="text-white text-sm">EMA</h3>
+              <p className="text-white/70 text-xs">Moving Average</p>
             </div>
           </div>
           <div className="space-y-3">
-            <div className="bg-black/10 rounded-2xl p-3 backdrop-blur-sm">
+            <div className="bg-white/10 rounded-2xl p-3 backdrop-blur-sm">
               <div className="flex justify-between items-center">
-                <span className="text-black/70 text-sm">EMA 20</span>
-                <span className="text-black text-lg">{ema20.toFixed(4)}</span>
+                <span className="text-white/70 text-sm">EMA 20</span>
+                <span className="text-white text-lg">{ema20.toFixed(4)}</span>
               </div>
             </div>
-            <div className="bg-black/10 rounded-2xl p-3 backdrop-blur-sm">
+            <div className="bg-white/10 rounded-2xl p-3 backdrop-blur-sm">
               <div className="flex justify-between items-center">
-                <span className="text-black/70 text-sm">EMA 50</span>
-                <span className="text-black text-lg">{ema50.toFixed(4)}</span>
+                <span className="text-white/70 text-sm">EMA 50</span>
+                <span className="text-white text-lg">{ema50.toFixed(4)}</span>
               </div>
             </div>
-            <div className="bg-black/10 rounded-2xl p-3 backdrop-blur-sm">
+            <div className="bg-white/10 rounded-2xl p-3 backdrop-blur-sm">
               <div className="flex justify-between items-center">
-                <span className="text-black/70 text-sm">EMA 200</span>
-                <span className="text-black text-lg">{ema200.toFixed(4)}</span>
+                <span className="text-white/70 text-sm">EMA 200</span>
+                <span className="text-white text-lg">{ema200.toFixed(4)}</span>
               </div>
             </div>
-            <div className="mt-4 pt-4 border-t border-black/20">
+            <div className="mt-4 pt-4 border-t border-white/20">
               <div className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-black" />
-                <span className="text-sm text-black">Bullish Trend</span>
+                <TrendingUp className="w-4 h-4 text-white" />
+                <span className="text-sm text-white">Bullish Trend</span>
               </div>
-              <p className="text-xs text-black/60 mt-1">
+              <p className="text-xs text-white/60 mt-1">
                 Price above EMA 20 and EMA 50
               </p>
             </div>
@@ -97,69 +97,69 @@ export function TechnicalIndicators({ pair, timeframe, activeIndicators }: Techn
 
       {/* RSI Card */}
       {activeIndicators.includes('RSI') && (
-        <div className="bg-gradient-to-br from-pink-400 to-pink-500 rounded-3xl p-6 shadow-xl">
+        <div className="bg-gradient-to-br from-cyan-500 to-cyan-400 rounded-3xl p-6 shadow-xl">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-12 h-12 bg-black/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-              <Activity className="w-6 h-6 text-black" />
+            <div className="w-12 h-12 bg-blue-900/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <Activity className="w-6 h-6 text-blue-900" />
             </div>
             <div>
-              <h3 className="text-black text-sm">RSI</h3>
-              <p className="text-black/70 text-xs">Strength Index</p>
+              <h3 className="text-blue-900 text-sm">RSI</h3>
+              <p className="text-blue-900/70 text-xs">Strength Index</p>
             </div>
           </div>
           <div className="mb-4">
-            <div className="bg-black/10 rounded-2xl p-4 backdrop-blur-sm mb-3">
+            <div className="bg-blue-900/10 rounded-2xl p-4 backdrop-blur-sm mb-3">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-black/70 text-sm">Current RSI</span>
-                <span className="text-black text-3xl">{currentRSI.toFixed(0)}</span>
+                <span className="text-blue-900/70 text-sm">Current RSI</span>
+                <span className="text-blue-900 text-3xl">{currentRSI.toFixed(0)}</span>
               </div>
-              <div className="w-full h-3 bg-black/20 rounded-full overflow-hidden">
+              <div className="w-full h-3 bg-blue-900/20 rounded-full overflow-hidden">
                 <div
-                  className={`h-full transition-all bg-black/40`}
+                  className={`h-full transition-all bg-blue-900/40`}
                   style={{ width: `${currentRSI}%` }}
                 />
               </div>
-              <div className="flex justify-between text-xs text-black/60 mt-1">
+              <div className="flex justify-between text-xs text-blue-900/60 mt-1">
                 <span>30</span>
                 <span>70</span>
               </div>
             </div>
             <ResponsiveContainer width="100%" height={100}>
               <LineChart data={rsiData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(30, 58, 138, 0.2)" />
                 <XAxis dataKey="time" hide />
                 <YAxis domain={[0, 100]} hide />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    backgroundColor: 'rgba(30, 58, 138, 0.9)',
                     border: 'none',
                     borderRadius: '12px',
                     color: '#fff',
                     padding: '8px'
                   }}
                 />
-                <ReferenceLine y={70} stroke="rgba(0,0,0,0.3)" strokeDasharray="3 3" />
-                <ReferenceLine y={30} stroke="rgba(0,0,0,0.3)" strokeDasharray="3 3" />
-                <Line type="monotone" dataKey="rsi" stroke="#000" strokeWidth={3} dot={false} />
+                <ReferenceLine y={70} stroke="rgba(30, 58, 138, 0.4)" strokeDasharray="3 3" />
+                <ReferenceLine y={30} stroke="rgba(30, 58, 138, 0.4)" strokeDasharray="3 3" />
+                <Line type="monotone" dataKey="rsi" stroke="#1e3a8a" strokeWidth={3} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </div>
-          <div className="mt-3 pt-3 border-t border-black/20">
+          <div className="mt-3 pt-3 border-t border-blue-900/20">
             <div className="flex items-center gap-2">
               {currentRSI > 70 ? (
                 <>
-                  <TrendingDown className="w-4 h-4 text-black" />
-                  <span className="text-sm text-black">Overbought</span>
+                  <TrendingDown className="w-4 h-4 text-blue-900" />
+                  <span className="text-sm text-blue-900">Overbought</span>
                 </>
               ) : currentRSI < 30 ? (
                 <>
-                  <TrendingUp className="w-4 h-4 text-black" />
-                  <span className="text-sm text-black">Oversold</span>
+                  <TrendingUp className="w-4 h-4 text-blue-900" />
+                  <span className="text-sm text-blue-900">Oversold</span>
                 </>
               ) : (
                 <>
-                  <Activity className="w-4 h-4 text-black" />
-                  <span className="text-sm text-black">Neutral</span>
+                  <Activity className="w-4 h-4 text-blue-900" />
+                  <span className="text-sm text-blue-900">Neutral</span>
                 </>
               )}
             </div>
@@ -169,37 +169,37 @@ export function TechnicalIndicators({ pair, timeframe, activeIndicators }: Techn
 
       {/* MACD Card */}
       {activeIndicators.includes('MACD') && (
-        <div className="bg-gradient-to-br from-lime-400 to-lime-500 rounded-3xl p-6 shadow-xl">
+        <div className="bg-gradient-to-br from-cyan-300 to-cyan-200 rounded-3xl p-6 shadow-xl">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-12 h-12 bg-black/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-              <Activity className="w-6 h-6 text-black" />
+            <div className="w-12 h-12 bg-blue-900/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <Activity className="w-6 h-6 text-blue-900" />
             </div>
             <div>
-              <h3 className="text-black text-sm">MACD</h3>
-              <p className="text-black/70 text-xs">Convergence/Divergence</p>
+              <h3 className="text-blue-900 text-sm">MACD</h3>
+              <p className="text-blue-900/70 text-xs">Convergence/Divergence</p>
             </div>
           </div>
           <div className="space-y-3 mb-4">
-            <div className="bg-black/10 rounded-2xl p-3 backdrop-blur-sm">
+            <div className="bg-blue-900/10 rounded-2xl p-3 backdrop-blur-sm">
               <div className="flex justify-between items-center">
-                <span className="text-black/70 text-xs">MACD Line</span>
-                <span className="text-black text-sm">
+                <span className="text-blue-900/70 text-xs">MACD Line</span>
+                <span className="text-blue-900 text-sm">
                   {currentMACD.macd.toFixed(5)}
                 </span>
               </div>
             </div>
-            <div className="bg-black/10 rounded-2xl p-3 backdrop-blur-sm">
+            <div className="bg-blue-900/10 rounded-2xl p-3 backdrop-blur-sm">
               <div className="flex justify-between items-center">
-                <span className="text-black/70 text-xs">Signal Line</span>
-                <span className="text-black text-sm">
+                <span className="text-blue-900/70 text-xs">Signal Line</span>
+                <span className="text-blue-900 text-sm">
                   {currentMACD.signal.toFixed(5)}
                 </span>
               </div>
             </div>
-            <div className="bg-black/10 rounded-2xl p-3 backdrop-blur-sm">
+            <div className="bg-blue-900/10 rounded-2xl p-3 backdrop-blur-sm">
               <div className="flex justify-between items-center">
-                <span className="text-black/70 text-xs">Histogram</span>
-                <span className="text-black text-sm">
+                <span className="text-blue-900/70 text-xs">Histogram</span>
+                <span className="text-blue-900 text-sm">
                   {currentMACD.histogram.toFixed(5)}
                 </span>
               </div>
@@ -207,12 +207,12 @@ export function TechnicalIndicators({ pair, timeframe, activeIndicators }: Techn
           </div>
           <ResponsiveContainer width="100%" height={100}>
             <LineChart data={macdData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(30, 58, 138, 0.2)" />
               <XAxis dataKey="time" hide />
               <YAxis hide />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: 'rgba(0,0,0,0.8)',
+                  backgroundColor: 'rgba(30, 58, 138, 0.9)',
                   border: 'none',
                   borderRadius: '12px',
                   color: '#fff',
@@ -220,22 +220,22 @@ export function TechnicalIndicators({ pair, timeframe, activeIndicators }: Techn
                 }}
                 formatter={(value: number) => value.toFixed(5)}
               />
-              <ReferenceLine y={0} stroke="rgba(0,0,0,0.3)" strokeWidth={2} />
-              <Line type="monotone" dataKey="macd" stroke="#000" strokeWidth={2} dot={false} />
-              <Line type="monotone" dataKey="signal" stroke="rgba(0,0,0,0.5)" strokeWidth={2} dot={false} strokeDasharray="5 5" />
+              <ReferenceLine y={0} stroke="rgba(30, 58, 138, 0.4)" strokeWidth={2} />
+              <Line type="monotone" dataKey="macd" stroke="#1e3a8a" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="signal" stroke="rgba(30, 58, 138, 0.6)" strokeWidth={2} dot={false} strokeDasharray="5 5" />
             </LineChart>
           </ResponsiveContainer>
-          <div className="mt-3 pt-3 border-t border-black/20">
+          <div className="mt-3 pt-3 border-t border-blue-900/20">
             <div className="flex items-center gap-2">
               {currentMACD.macd > currentMACD.signal ? (
                 <>
-                  <TrendingUp className="w-4 h-4 text-black" />
-                  <span className="text-sm text-black">Bullish Crossover</span>
+                  <TrendingUp className="w-4 h-4 text-blue-900" />
+                  <span className="text-sm text-blue-900">Bullish Crossover</span>
                 </>
               ) : (
                 <>
-                  <TrendingDown className="w-4 h-4 text-black" />
-                  <span className="text-sm text-black">Bearish Crossover</span>
+                  <TrendingDown className="w-4 h-4 text-blue-900" />
+                  <span className="text-sm text-blue-900">Bearish Crossover</span>
                 </>
               )}
             </div>

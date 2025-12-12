@@ -41,8 +41,8 @@ export function VolumeChart() {
         <Bar dataKey="volume" fill="url(#volumeGradient)" radius={[12, 12, 0, 0]} />
         <defs>
           <linearGradient id="volumeGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#84cc16" />
-            <stop offset="100%" stopColor="#22c55e" />
+            <stop offset="0%" stopColor="#22d3ee" />
+            <stop offset="100%" stopColor="#06b6d4" />
           </linearGradient>
         </defs>
       </BarChart>

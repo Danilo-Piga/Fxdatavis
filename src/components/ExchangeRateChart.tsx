@@ -57,12 +57,12 @@ export function ExchangeRateChart({ timeframe, pair, showHistorical, activeIndic
       <AreaChart data={data}>
         <defs>
           <linearGradient id="colorRate" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.6}/>
-            <stop offset="95%" stopColor="#06b6d4" stopOpacity={0}/>
+            <stop offset="5%" stopColor="#22d3ee" stopOpacity={0.6}/>
+            <stop offset="95%" stopColor="#22d3ee" stopOpacity={0}/>
           </linearGradient>
           <linearGradient id="colorHistorical" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#a855f7" stopOpacity={0.4}/>
-            <stop offset="95%" stopColor="#a855f7" stopOpacity={0}/>
+            <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.4}/>
+            <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
           </linearGradient>
         </defs>
         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
@@ -103,7 +103,7 @@ export function ExchangeRateChart({ timeframe, pair, showHistorical, activeIndic
           <Area
             type="monotone"
             dataKey="historical"
-            stroke="#a855f7"
+            stroke="#3b82f6"
             strokeWidth={2}
             strokeDasharray="5 5"
             fill="url(#colorHistorical)"
@@ -115,7 +115,7 @@ export function ExchangeRateChart({ timeframe, pair, showHistorical, activeIndic
         <Area
           type="monotone"
           dataKey="rate"
-          stroke="#06b6d4"
+          stroke="#22d3ee"
           strokeWidth={3}
           fill="url(#colorRate)"
           name="Current"
@@ -127,7 +127,7 @@ export function ExchangeRateChart({ timeframe, pair, showHistorical, activeIndic
             <Line
               type="monotone"
               dataKey="ema20"
-              stroke="#a855f7"
+              stroke="#06b6d4"
               strokeWidth={2}
               dot={false}
               name="EMA 20"
@@ -135,7 +135,7 @@ export function ExchangeRateChart({ timeframe, pair, showHistorical, activeIndic
             <Line
               type="monotone"
               dataKey="ema50"
-              stroke="#ec4899"
+              stroke="#0ea5e9"
               strokeWidth={2}
               dot={false}
               name="EMA 50"
@@ -143,7 +143,7 @@ export function ExchangeRateChart({ timeframe, pair, showHistorical, activeIndic
             <Line
               type="monotone"
               dataKey="ema200"
-              stroke="#84cc16"
+              stroke="#3b82f6"
               strokeWidth={2}
               dot={false}
               name="EMA 200"

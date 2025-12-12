@@ -24,12 +24,12 @@ export function CurrencyPairCard({
   const isPositive = change >= 0;
 
   const colors = [
-    'from-lime-400 to-lime-500',
-    'from-cyan-400 to-cyan-500',
-    'from-pink-400 to-pink-500',
-    'from-purple-400 to-purple-500',
-    'from-blue-400 to-blue-500',
-    'from-rose-400 to-rose-500',
+    'from-blue-900 to-blue-800',
+    'from-blue-600 to-blue-500',
+    'from-blue-500 to-cyan-500',
+    'from-cyan-500 to-cyan-400',
+    'from-cyan-400 to-cyan-300',
+    'from-cyan-300 to-cyan-200',
   ];
   
   const colorIndex = pair.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % colors.length;

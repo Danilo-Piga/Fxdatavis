@@ -69,19 +69,19 @@ export function CurrencyConverter({ currencyPairs }: CurrencyConverterProps) {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
       {/* From Currency */}
       <div>
-        <label className="block text-xs text-black/70 mb-2">From</label>
+        <label className="block text-xs text-blue-900/70 mb-2">From</label>
         <div className="flex gap-2">
           <input
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="flex-1 px-4 py-3 border-2 border-black/10 rounded-2xl text-black bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black/20 placeholder-black/40"
+            className="flex-1 px-4 py-3 border-2 border-blue-900/10 rounded-2xl text-blue-900 bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-900/20 placeholder-blue-900/40"
             placeholder="Amount"
           />
           <select
             value={fromCurrency}
             onChange={(e) => setFromCurrency(e.target.value)}
-            className="px-3 py-3 border-2 border-black/10 rounded-2xl text-black bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black/20"
+            className="px-3 py-3 border-2 border-blue-900/10 rounded-2xl text-blue-900 bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-900/20"
           >
             {currencies.map((curr) => (
               <option key={curr} value={curr}>
@@ -96,7 +96,7 @@ export function CurrencyConverter({ currencyPairs }: CurrencyConverterProps) {
       <div className="flex justify-center">
         <button
           onClick={swapCurrencies}
-          className="w-12 h-12 bg-black/20 hover:bg-black/30 backdrop-blur-sm text-black rounded-2xl transition-all flex items-center justify-center shadow-lg"
+          className="w-12 h-12 bg-blue-900/20 hover:bg-blue-900/30 backdrop-blur-sm text-blue-900 rounded-2xl transition-all flex items-center justify-center shadow-lg"
         >
           <ArrowLeftRight className="w-5 h-5" />
         </button>
@@ -104,15 +104,15 @@ export function CurrencyConverter({ currencyPairs }: CurrencyConverterProps) {
 
       {/* To Currency */}
       <div>
-        <label className="block text-xs text-black/70 mb-2">To</label>
+        <label className="block text-xs text-blue-900/70 mb-2">To</label>
         <div className="flex gap-2">
-          <div className="flex-1 px-4 py-3 border-2 border-black/10 rounded-2xl bg-black/10 backdrop-blur-sm text-black">
+          <div className="flex-1 px-4 py-3 border-2 border-blue-900/10 rounded-2xl bg-blue-900/10 backdrop-blur-sm text-blue-900">
             {convertedAmount.toFixed(2)}
           </div>
           <select
             value={toCurrency}
             onChange={(e) => setToCurrency(e.target.value)}
-            className="px-3 py-3 border-2 border-black/10 rounded-2xl text-black bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black/20"
+            className="px-3 py-3 border-2 border-blue-900/10 rounded-2xl text-blue-900 bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-900/20"
           >
             {currencies.map((curr) => (
               <option key={curr} value={curr}>
@@ -125,7 +125,7 @@ export function CurrencyConverter({ currencyPairs }: CurrencyConverterProps) {
 
       {/* Exchange Rate Display */}
       <div className="md:col-span-3 mt-1">
-        <p className="text-xs text-black/60">
+        <p className="text-xs text-blue-900/60">
           1 {fromCurrency} = {rate.toFixed(4)} {toCurrency}
         </p>
       </div>

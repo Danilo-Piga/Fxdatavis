@@ -95,7 +95,7 @@ export default function App() {
                 onClick={() => setTimeframe(tf)}
                 className={`px-3 py-1.5 rounded-full text-sm transition-all ${
                   timeframe === tf
-                    ? 'bg-cyan-400 text-black'
+                    ? 'bg-cyan-400 text-blue-900'
                     : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
                 }`}
               >
@@ -110,10 +110,10 @@ export default function App() {
           {marketSummary.map((item, index) => {
             const Icon = item.icon;
             const colors = [
-              'from-lime-400 to-lime-500',
-              'from-cyan-400 to-cyan-500',
-              'from-pink-400 to-pink-500',
-              'from-purple-400 to-purple-500'
+              'from-blue-900 to-blue-800',
+              'from-blue-500 to-cyan-500',
+              'from-cyan-400 to-cyan-300',
+              'from-cyan-200 to-cyan-100'
             ];
             return (
               <div
@@ -122,13 +122,11 @@ export default function App() {
               >
                 <div className="relative z-10">
                   <div className="flex items-start justify-between mb-3">
-                    <div className="w-10 h-10 bg-black/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                      <Icon className="w-5 h-5 text-black" />
+                    <div className={`w-10 h-10 ${index < 2 ? 'bg-white/20' : 'bg-blue-900/20'} rounded-2xl flex items-center justify-center backdrop-blur-sm`}>
+                      <Icon className={`w-5 h-5 ${index < 2 ? 'text-white' : 'text-blue-900'}`} />
                     </div>
                     {item.trend !== 0 && (
-                      <div className={`flex items-center gap-1 text-sm ${
-                        item.trend > 0 ? 'text-black' : 'text-black'
-                      }`}>
+                      <div className={`flex items-center gap-1 text-sm ${index < 2 ? 'text-white' : 'text-blue-900'}`}>
                         {item.trend > 0 ? (
                           <TrendingUp className="w-4 h-4" />
                         ) : (
@@ -138,8 +136,8 @@ export default function App() {
                       </div>
                     )}
                   </div>
-                  <p className="text-black/70 text-xs mb-1">{item.label}</p>
-                  <p className="text-black text-2xl">{item.value}</p>
+                  <p className={`${index < 2 ? 'text-white/70' : 'text-blue-900/70'} text-xs mb-1`}>{item.label}</p>
+                  <p className={`${index < 2 ? 'text-white' : 'text-blue-900'} text-2xl`}>{item.value}</p>
                 </div>
               </div>
             );
@@ -147,12 +145,12 @@ export default function App() {
         </div>
 
         {/* Currency Converter */}
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl p-6 shadow-xl">
+        <div className="bg-gradient-to-br from-cyan-500 to-cyan-400 rounded-3xl p-6 shadow-xl">
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-10 h-10 bg-black/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-              <ArrowRightLeft className="w-5 h-5 text-black" />
+            <div className="w-10 h-10 bg-blue-900/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <ArrowRightLeft className="w-5 h-5 text-blue-900" />
             </div>
-            <h2 className="text-black">Currency Converter</h2>
+            <h2 className="text-blue-900">Currency Converter</h2>
           </div>
           <CurrencyConverter currencyPairs={currencyPairs} />
         </div>
@@ -194,14 +192,15 @@ export default function App() {
             {/* Technical Indicator Toggles */}
             <div className="flex gap-2 mb-4">
               {['EMA', 'RSI', 'MACD'].map((indicator, index) => {
-                const colors = ['bg-purple-500', 'bg-pink-500', 'bg-lime-500'];
+                const colors = ['bg-blue-500', 'bg-cyan-500', 'bg-cyan-300'];
+                const textColors = ['text-white', 'text-white', 'text-blue-900'];
                 return (
                   <button
                     key={indicator}
                     onClick={() => toggleIndicator(indicator)}
                     className={`px-3 py-1 rounded-full text-xs transition-all ${
                       activeIndicators.includes(indicator)
-                        ? `${colors[index]} text-black shadow-lg`
+                        ? `${colors[index]} ${textColors[index]} shadow-lg`
                         : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
                     }`}
                   >
@@ -246,8 +245,8 @@ export default function App() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-800">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center">
-                <DollarSign className="w-5 h-5 text-black" />
+              <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-cyan-400 rounded-2xl flex items-center justify-center">
+                <DollarSign className="w-5 h-5 text-blue-900" />
               </div>
               <div>
                 <h2 className="text-white">Trading Volume</h2>
@@ -259,8 +258,8 @@ export default function App() {
 
           <div className="bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-800">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl flex items-center justify-center">
-                <Globe className="w-5 h-5 text-black" />
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center">
+                <Globe className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h2 className="text-white">Market Heatmap</h2>
